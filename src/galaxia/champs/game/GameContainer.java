@@ -15,6 +15,13 @@ public class GameContainer extends JFrame {
     private Timer novosIni;
     private Timer novaVida;
     private List<Inimigo> inimigos;
+    private List<Tiro1> tiros;
+    private List<AddVida> addVida;
+    private List<Timer> tempos;
+    private List<Explosao> explosoes;
+
+    private int contPontos = 0;
+    private int contVida = 3;
 
     /**
      * ===========================================================MAIN
@@ -55,7 +62,19 @@ public class GameContainer extends JFrame {
         // INICIALIZA INIMIGOS
         inicializaInimigos();
 
-        // CONTROLA O TEMPO PARA CRIAR INIMIGOS
+        // LISTA TIRO1
+        tiros = new ArrayList<Tiro1>();
+
+        // LISTA DE VIDAS
+        addVida = new ArrayList<AddVida>();
+
+        // LISTA TEMPO (EXPLOSÃO)
+        tempos = new ArrayList<Timer>();
+
+        // LISTA EXPLOSÕES
+        explosoes = new ArrayList<Explosao>();
+
+        // CONTROLA O TEMPO PARA CRIAR INIMIGIOS
         novosIni = new Timer(900, new novoInimigo());
         novosIni.start();
 
@@ -112,33 +131,5 @@ public class GameContainer extends JFrame {
         mnNaoAbatido.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
         menuBar.add(mnNaoAbatido);
 
-        // TEMPORALIZADOR (TEMPO DO JOGO)
-        mnTempo = new JMenu("Tempo: " + t.minutos + ":" + t.segundos);
-        mnTempo.setEnabled(true);
-        mnTempo.setHorizontalTextPosition(SwingConstants.CENTER);
-        mnTempo.setHorizontalAlignment(SwingConstants.CENTER);
-        mnTempo.setVerticalAlignment(SwingConstants.BOTTOM);
-        mnTempo.setVerticalTextPosition(SwingConstants.BOTTOM);
-        mnTempo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
-        menuBar.add(mnTempo);
-    }
-
-    private class novoInimigo implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // Lógica para criar novos inimigos
-            inimigos.add(new Inimigo(1 + (int) (550 * Math.random()), -80));
-        }
-    }
-
-    private class novaVida implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // Lógica para criar nova vida
-        }
-    }
-
-    private class Listener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // Lógica do jogo
-        }
-    }
+	}
 }
