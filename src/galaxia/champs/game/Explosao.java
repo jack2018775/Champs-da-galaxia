@@ -10,6 +10,9 @@ public class Explosao implements ActionListener {
     private int x, y;
     private Image imagem;
 
+    // POSIÇÃO DA IMAGEM EXPLOÃO
+    private static final int LARGURA = 52, ALTURA = 64;
+
     public Explosao(int x, int y) {
         ImageIcon referencia = new ImageIcon("res/explosao/explosao.png");
         imagem = referencia.getImage();
@@ -34,6 +37,14 @@ public class Explosao implements ActionListener {
 
     public int getY() {
         return y;
+    }
+
+    public int getAlt() {
+        return ALTURA;
+    }
+
+    public int getLar() {
+        return LARGURA;
     }
 
     public Image getImagem() {
