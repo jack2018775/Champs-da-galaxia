@@ -1,10 +1,15 @@
 package galaxia.champs.game;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class GameContainer extends JFrame {
 
     private static final long serialVersionUID = 1L;
+
+    private Timer timer;
+    private Timer novosIni;
+    private Timer novaVida;
 
     /**
      * ===========================================================MAIN
@@ -35,5 +40,35 @@ public class GameContainer extends JFrame {
 
         // JANELA VISIVEL
         setVisible(true);
+
+        // CONTROLA O TEMPO PARA CRIAR INIMIGOS
+        novosIni = new Timer(900, new novoInimigo());
+        novosIni.start();
+
+        // CONTROLA O TEMPO PARA CRIAR ADD VIDA
+        novaVida = new Timer(900, new novaVida());
+        novaVida.start();
+
+        // CONTROLA O TEMPO (VELOCIDADE) JOGO
+        timer = new Timer(5, new Listener());
+        timer.start();
+    }
+
+    private class novoInimigo implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica para criar novos inimigos
+        }
+    }
+
+    private class novaVida implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica para criar nova vida
+        }
+    }
+
+    private class Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica do jogo
+        }
     }
 }
