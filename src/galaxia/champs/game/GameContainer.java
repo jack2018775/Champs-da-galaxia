@@ -54,6 +54,18 @@ public class GameContainer extends JFrame {
 
         // INICIALIZA INIMIGOS
         inicializaInimigos();
+
+        // CONTROLA O TEMPO PARA CRIAR INIMIGOS
+        novosIni = new Timer(900, new novoInimigo());
+        novosIni.start();
+
+        // CONTROLA O TEMPO PARA CRIAR ADD VIDA
+        novaVida = new Timer(900, new novaVida());
+        novaVida.start();
+
+        // CONTROLA O TEMPO (VELOCIDADE) JOGO
+        timer = new Timer(5, new Listener());
+        timer.start();
     }
 
     private void inicializaInimigos() {
@@ -91,4 +103,42 @@ public class GameContainer extends JFrame {
         menuBar.add(mnPontuacao);
 
         // NÃO ABATIDOS
-        mnNaoAbatido = new JMenu("Não Abatidos: " + naoAbatidos)
+        mnNaoAbatido = new JMenu("Não Abatidos: " + naoAbatidos);
+        mnNaoAbatido.setEnabled(true);
+        mnNaoAbatido.setHorizontalTextPosition(SwingConstants.CENTER);
+        mnNaoAbatido.setHorizontalAlignment(SwingConstants.CENTER);
+        mnNaoAbatido.setVerticalAlignment(SwingConstants.BOTTOM);
+        mnNaoAbatido.setVerticalTextPosition(SwingConstants.BOTTOM);
+        mnNaoAbatido.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnNaoAbatido);
+
+        // TEMPORALIZADOR (TEMPO DO JOGO)
+        mnTempo = new JMenu("Tempo: " + t.minutos + ":" + t.segundos);
+        mnTempo.setEnabled(true);
+        mnTempo.setHorizontalTextPosition(SwingConstants.CENTER);
+        mnTempo.setHorizontalAlignment(SwingConstants.CENTER);
+        mnTempo.setVerticalAlignment(SwingConstants.BOTTOM);
+        mnTempo.setVerticalTextPosition(SwingConstants.BOTTOM);
+        mnTempo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnTempo);
+    }
+
+    private class novoInimigo implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica para criar novos inimigos
+            inimigos.add(new Inimigo(1 + (int) (550 * Math.random()), -80));
+        }
+    }
+
+    private class novaVida implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica para criar nova vida
+        }
+    }
+
+    private class Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica do jogo
+        }
+    }
+}
