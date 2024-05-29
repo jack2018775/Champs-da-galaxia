@@ -1,9 +1,11 @@
 package galaxia.champs.game;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
-public class Explosao {
+public class Explosao implements ActionListener {
     private int cont;
     private int x, y;
     private Image imagem;
@@ -17,7 +19,8 @@ public class Explosao {
         this.cont = 0;
     }
 
-    public void incrementarCont() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
         cont++;
     }
 
