@@ -131,5 +131,58 @@ public class GameContainer extends JFrame {
         mnNaoAbatido.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
         menuBar.add(mnNaoAbatido);
 
-	}
+        // TEMPORALIZADOR (TEMPO DO JOGO)
+        mnTempo = new JMenu("Tempo: " + t.minutos + ":" + t.segundos);
+        mnTempo.setEnabled(true);
+        mnTempo.setHorizontalTextPosition(SwingConstants.CENTER);
+        mnTempo.setHorizontalAlignment(SwingConstants.CENTER);
+        mnTempo.setVerticalAlignment(SwingConstants.BOTTOM);
+        mnTempo.setVerticalTextPosition(SwingConstants.BOTTOM);
+        mnTempo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnTempo);
+    }
+
+    private class novoInimigo implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica para criar novos inimigos
+            inimigos.add(new Inimigo(1 + (int) (550 * Math.random()), -80));
+        }
+    }
+
+    private class novaVida implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica para criar nova vida
+        }
+    }
+
+    private class Listener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Lógica do jogo
+
+            // Colisões entre tiros e inimigos
+            for (int i = 0; i < tiros.size(); i++) {
+                Tiro1 tiro = tiros.get(i);
+                for (int j = 0; j < inimigos.size(); j++) {
+                    Inimigo ini = inimigos.get(j);
+                    if (tiro.getBounds().intersects(ini.getBounds())) {
+                        tiros.remove(i);
+                        inimigos.remove(j);
+                        contPontos += 10;
+                        i--;
+                        break;
+                    }
+                }
+            }
+
+            // Colisões entre nave e inimigos
+            for (int i = 0; i < inimigos.size(); i++) {
+                Inimigo ini = inimigos.get(i);
+                if (nave.getBounds().intersects(ini.getBounds())) {
+                    inimigos.remove(i);
+                    contVida--;
+                    i--;
+                }
+            }
+        }
+    }
 }
