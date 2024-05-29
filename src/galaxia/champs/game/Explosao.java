@@ -4,6 +4,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Explosao {
+    private int cont;
     private int x, y;
     private Image imagem;
 
@@ -13,6 +14,15 @@ public class Explosao {
 
         this.x = x;
         this.y = y;
+        this.cont = 0;
+    }
+
+    public void incrementarCont() {
+        cont++;
+    }
+
+    public int getCont() {
+        return cont;
     }
 
     public int getX() {
