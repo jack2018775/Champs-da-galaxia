@@ -1,15 +1,21 @@
 package galaxia.champs.game;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class GameContainer extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    private Timer timer;
-    private Timer novosIni;
-    private Timer novaVida;
+    private JMenuBar menuBar;
+    private JMenu mnMissao;
+    private JMenu mnVida;
+    private JMenu mnPontuacao;
+    private JMenu mnNaoAbatido;
+    private JMenu mnTempo;
 
     /**
      * ===========================================================MAIN
@@ -41,34 +47,55 @@ public class GameContainer extends JFrame {
         // JANELA VISIVEL
         setVisible(true);
 
-        // CONTROLA O TEMPO PARA CRIAR INIMIGOS
-        novosIni = new Timer(900, new novoInimigo());
-        novosIni.start();
-
-        // CONTROLA O TEMPO PARA CRIAR ADD VIDA
-        novaVida = new Timer(900, new novaVida());
-        novaVida.start();
-
-        // CONTROLA O TEMPO (VELOCIDADE) JOGO
-        timer = new Timer(5, new Listener());
-        timer.start();
+        // START MENU
+        iniciarMenuInfo();
     }
 
-    private class novoInimigo implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // Lógica para criar novos inimigos
-        }
-    }
+    public void iniciarMenuInfo() {
+        // MENU BAR
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
 
-    private class novaVida implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // Lógica para criar nova vida
-        }
-    }
+        // MISSÃO
+        mnMissao = new JMenu("Missão: " + contMissao);
+        mnMissao.setEnabled(true);
+        mnMissao.setHorizontalTextPosition(SwingConstants.CENTER);
+        mnMissao.setHorizontalAlignment(SwingConstants.CENTER);
+        mnMissao.setVerticalAlignment(SwingConstants.BOTTOM);
+        mnMissao.setVerticalTextPosition(SwingConstants.BOTTOM);
+        mnMissao.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnMissao);
 
-    private class Listener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            // Lógica do jogo
-        }
+        // VIDA
+        mnVida = new JMenu(" x " + contVida);
+        mnVida.setEnabled(true);
+        mnVida.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnVida);
+
+        // PONTUAÇÃO
+        mnPontuacao = new JMenu("x" + contPontos);
+        mnPontuacao.setEnabled(true);
+        mnPontuacao.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnPontuacao);
+
+        // NÃO ABATIDOS
+        mnNaoAbatido = new JMenu("Não Abatidos: " + naoAbatidos);
+        mnNaoAbatido.setEnabled(true);
+        mnNaoAbatido.setHorizontalTextPosition(SwingConstants.CENTER);
+        mnNaoAbatido.setHorizontalAlignment(SwingConstants.CENTER);
+        mnNaoAbatido.setVerticalAlignment(SwingConstants.BOTTOM);
+        mnNaoAbatido.setVerticalTextPosition(SwingConstants.BOTTOM);
+        mnNaoAbatido.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnNaoAbatido);
+
+        // TEMPORALIZADOR (TEMPO DO JOGO)
+        mnTempo = new JMenu("Tempo: " + t.minutos + ":" + t.segundos);
+        mnTempo.setEnabled(true);
+        mnTempo.setHorizontalTextPosition(SwingConstants.CENTER);
+        mnTempo.setHorizontalAlignment(SwingConstants.CENTER);
+        mnTempo.setVerticalAlignment(SwingConstants.BOTTOM);
+        mnTempo.setVerticalTextPosition(SwingConstants.BOTTOM);
+        mnTempo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
+        menuBar.add(mnTempo);
     }
 }
