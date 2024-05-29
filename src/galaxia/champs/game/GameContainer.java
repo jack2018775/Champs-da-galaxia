@@ -1,21 +1,20 @@
 package galaxia.champs.game;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameContainer extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    private JMenuBar menuBar;
-    private JMenu mnMissao;
-    private JMenu mnVida;
-    private JMenu mnPontuacao;
-    private JMenu mnNaoAbatido;
-    private JMenu mnTempo;
+    private Timer timer;
+    private Timer novosIni;
+    private Timer novaVida;
+    private List<Inimigo> inimigos;
 
     /**
      * ===========================================================MAIN
@@ -49,6 +48,19 @@ public class GameContainer extends JFrame {
 
         // START MENU
         iniciarMenuInfo();
+
+        // LISTA INIMIGOS
+        inimigos = new ArrayList<Inimigo>();
+
+        // INICIALIZA INIMIGOS
+        inicializaInimigos();
+    }
+
+    private void inicializaInimigos() {
+        for (int i = 0; i < inimigos.size(); i++) {
+            inimigos.remove(i);
+            i--;
+        }
     }
 
     public void iniciarMenuInfo() {
@@ -79,23 +91,4 @@ public class GameContainer extends JFrame {
         menuBar.add(mnPontuacao);
 
         // NÃO ABATIDOS
-        mnNaoAbatido = new JMenu("Não Abatidos: " + naoAbatidos);
-        mnNaoAbatido.setEnabled(true);
-        mnNaoAbatido.setHorizontalTextPosition(SwingConstants.CENTER);
-        mnNaoAbatido.setHorizontalAlignment(SwingConstants.CENTER);
-        mnNaoAbatido.setVerticalAlignment(SwingConstants.BOTTOM);
-        mnNaoAbatido.setVerticalTextPosition(SwingConstants.BOTTOM);
-        mnNaoAbatido.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
-        menuBar.add(mnNaoAbatido);
-
-        // TEMPORALIZADOR (TEMPO DO JOGO)
-        mnTempo = new JMenu("Tempo: " + t.minutos + ":" + t.segundos);
-        mnTempo.setEnabled(true);
-        mnTempo.setHorizontalTextPosition(SwingConstants.CENTER);
-        mnTempo.setHorizontalAlignment(SwingConstants.CENTER);
-        mnTempo.setVerticalAlignment(SwingConstants.BOTTOM);
-        mnTempo.setVerticalTextPosition(SwingConstants.BOTTOM);
-        mnTempo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
-        menuBar.add(mnTempo);
-    }
-}
+        mnNaoAbatido = new JMenu("Não Abatidos: " + naoAbatidos)
